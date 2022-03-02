@@ -214,6 +214,8 @@
                             <select class="input-select">
                                 <option value="0">Popular</option>
                                 <option value="1">Position</option>
+                                <option value="1">Position</option>
+                                <option value="1">Position</option>
                             </select>
                         </label>
 
@@ -241,10 +243,11 @@
                                 <a asp-controller="SanPham" asp-action="Details" asp-route-id="@item.Id">
                                     <img src="~/images/@Html.DisplayFor(modelItem => item.AnhSanPham)" style="max-width:100%" />
                                 </a>
-                                <div class="product-body"style="min-height: 204px;">
+                                <div class="product-body" style="min-height: 204px;">
                                     <p class="product-category">Số lượng: @item.SoLuong</p>
                                     <h3 class="product-name">@item.TenSanPham</h3>
-                                    <h4 class="product-price">Giá: @String.Format("{0:N0}", item.GiaBan) VNĐ</h4>
+                                    <h5 class="product-old-price">Giá: @String.Format("{0:N0}", item.GiaBan) VNĐ</h5>
+                                    <h5 class="product-old-price">Giá KM: @String.Format("{0:N0}", item.GiaKhuyenMai) VNĐ</h5>
                                     <div class="product-rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -259,22 +262,76 @@
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
-                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                    <a class="add-to-cart-btn" asp-controller="Home" asp-action="AddToCart"asp-route-id="@item.Id"><i class="fa fa-shopping-cart"></i> add to cart</a>
                                 </div>
                             </div>
                         </div>
-                    }                   
+                    }
                 </div>
                 <!-- /store products -->
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
-                    <span class="store-qty">Showing 20-100 products</span>
                     <ul class="store-pagination">
-                        <li class="active">1</li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        @{
+                            int numberPage = ViewBag.numberPage;
+                            int pageCurrent = ViewBag.pageCurrent;
+                            int offset = 2;//number display page
+
+
+                            //config FirstLink
+                            if (pageCurrent > 1)
+                            {
+                                int prevPage = pageCurrent - 1;
+                                var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                                <li class="page-item"><a class="page-link" asp-controller="SanPham" asp-action="Index" asp-all-route-data="PrevLink">Trước</a></li>
+                            }
+
+                            int from = pageCurrent - offset;
+                            int to = pageCurrent + offset;
+                            if (from <= 0)
+                            {
+                                from = 1;
+                                to = offset * 2;
+                            }
+
+
+                            if (to > numberPage)
+                            {
+                                to = numberPage;
+                            }
+
+                            int i;
+                            for (i = from; i <= to; i++)
+                            {
+                                var parms = new Dictionary<string, string>
+                                                                                                                                        {
+                        { "page",i.ToString()}
+                    };
+                                if (pageCurrent == i)
+                                {
+                                    <li class="page-item active "><a class="page-link" asp-controller="SanPham" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item  "><a class="page-link" asp-controller="SanPham" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                                }
+
+                            }
+
+                            if (pageCurrent < numberPage - (to / 2))
+                            {
+                                <li><a>...</a></li>
+                                var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                                <li class="page-item"><a class="page-link" asp-controller="SanPham" asp-action="Index" asp-all-route-data="LastLink">Cuối</a></li>
+                            }
+
+                            if (pageCurrent < numberPage)
+                            {
+                                int nextPage = pageCurrent + 1;
+                                var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                                <li class="page-item"><a class="page-link" asp-controller="SanPham" asp-action="Index" asp-all-route-data="NextLink"><i class="fa fa-angle-right"></i></a></li>
+                            }
+                        }
                     </ul>
                 </div>
                 <!-- /store bottom filter -->

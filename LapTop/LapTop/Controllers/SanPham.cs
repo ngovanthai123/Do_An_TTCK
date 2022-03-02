@@ -28,7 +28,7 @@ namespace CuaHangBanLapTop.Controllers
         public IActionResult Index(string timkiem, int? page = 0)
         {
 
-            int limit = 12;
+            int limit = 9;
             int start;
             if (page > 0)
             {

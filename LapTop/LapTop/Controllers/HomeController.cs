@@ -1,4 +1,5 @@
 ﻿using LapTop.Data;
+using LapTop.Library;
 using LapTop.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,12 @@ namespace LapTop.Controllers
 {
     public class HomeController : Controller
     {
+        const string SessionMand = "_Id";
+        const string SessionHoten = "_HoVaTen";
+        const string SessionTenDN = "_TenDN";
+
+        public const string CARTKEY = "shopcart";
+
         private readonly ILogger<HomeController> _logger;
         private readonly LAPTOPContext _context;
         private LAPTOPContext db = new LAPTOPContext();
@@ -116,5 +123,95 @@ namespace LapTop.Controllers
             return RedirectToAction(nameof(Cart));
         }
 
+        public IActionResult CheckOut()
+        {
+            return View(GetCartItems());
+        }
+
+
+
+        public ActionResult Login()
+        {
+            ModelState.AddModelError("LoginError", "");
+            return View();
+        }
+
+
+        // POST: Home/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(KhachHangLogin khachHang)
+        {
+            if (ModelState.IsValid)
+            {
+                string mahoamatkhau = SHA1.ComputeHash(khachHang.MatKhau);
+                var taiKhoan = db.Khachhangs.Where(r => r.TenDangNhap == khachHang.TenDangNhap && r.MatKhau == mahoamatkhau).SingleOrDefault();
+
+                if (taiKhoan == null)
+                {
+                    ModelState.AddModelError("LoginError", "Tên đăng nhập hoặc mật khẩu không chính xác!");
+                    return View(khachHang);
+                }
+                else
+                {
+                    // Đăng ký SESSION
+
+                    HttpContext.Session.SetInt32(SessionMand, taiKhoan.Id);
+                    HttpContext.Session.SetString(SessionHoten, taiKhoan.HoVaTen);
+                    HttpContext.Session.SetString(SessionTenDN, taiKhoan.TenDangNhap);
+
+
+                    // Quay về trang chủ
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(khachHang);
+        }
+
+        public ActionResult Logout()
+        {
+            // Xóa SESSION
+            HttpContext.Session.Remove("_Id");
+            HttpContext.Session.Remove("_Hoten");
+            HttpContext.Session.Remove("_TenDN");
+            HttpContext.Session.Remove(CARTKEY);
+
+            // Quy về trang chủ
+            return RedirectToAction("Login", "Home");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignUp([Bind("Id,HoVaTen,DienThoai,DiaChi,Email,TenDangNhap,MatKhau,XacNhanMatKhau")] Khachhang khachHang)
+        {
+            if (ModelState.IsValid)
+            {
+                var check = db.Khachhangs.FirstOrDefault(r => r.TenDangNhap == khachHang.TenDangNhap);
+                if (check == null)
+                {
+
+                    khachHang.MatKhau = SHA1.ComputeHash(khachHang.MatKhau);
+                    khachHang.XacNhanMatKhau = SHA1.ComputeHash(khachHang.XacNhanMatKhau);
+                    _context.Add(khachHang);
+                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError("SignUpError", "Đăng ký thành công!");
+                    return RedirectToAction(nameof(Login));
+
+                }
+                else
+                {
+                    ViewBag.error = "Tên đăng nhập đã tồn tại !!! Bạn hãy chọn tên khác!!!!";
+                    return View();
+                }
+            }
+            return View();
+        }
+        public IActionResult SignUp()
+        {
+            ModelState.AddModelError("SignUpError", "");
+            return View();
+        }
     }
 }

@@ -1005,3 +1005,5 @@ E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\ref\LapTop.dll
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\LapTop.pdb
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\LapTop.genruntimeconfig.cache
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\Cart.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\CheckOut.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs

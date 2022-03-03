@@ -24,6 +24,8 @@ namespace LapTop.Models
         public string HoVaTen { get; set; }
         public int SoDienThoai { get; set; }
         [StringLength(255)]
+        public string DiaChi { get; set; }
+        [StringLength(255)]
         public string Email { get; set; }
         [Required]
         [StringLength(255)]

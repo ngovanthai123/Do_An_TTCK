@@ -10,7 +10,8 @@
     <table class="table" style="width: 90%; margin-left: 85px;">
         <tr>
             <th>STT</th>
-            <th>Sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th style="width:500px">Sản phẩm</th>
             <th>Giá</th>
             <th>Số lượng</th>
             <th>Thành tiền</th>
@@ -24,19 +25,21 @@
                 <td>@(num++)</td>
                 <td>
                     <img src="~/images/@(i.Sanpham.AnhSanPham)" class="img-thumbnail" width="50" />
-                    @(i.Sanpham.TenSanPham)
+
                 </td>
-                <td>@(i.Sanpham.GiaBan.ToString("n0"))</td>
+                <td>@(i.Sanpham.TenSanPham)</td>
+                <td>@((i.Sanpham.GiaBan).ToString("n0"))</td>
                 <td>
                     <form asp-action="UpdateItem" method="post">
                         <div class="row">
-                            <div class="col">
+                            <div class="col" style="width: 24%;">
                                 <input name="id" type="hidden" asp-for="@(i.Sanpham.Id)" />
                                 <input name="quantity" type="number" asp-for="@(i.Quantity)" class="form-control" />
+                                <div class="col">
+                                    <input class="btn btn-warning" type="submit" value="Cập nhật" />
+                                </div>
                             </div>
-                            <div class="col">
-                                <input class="btn btn-warning" type="submit" value="Cập nhật" />
-                            </div>
+                           
                         </div>
                     </form>
                 </td>
@@ -45,7 +48,7 @@
             </tr>
         }
         <tr>
-            <td colspan="4" class="text-end">Thành tiền</td>
+            <td colspan="4" class="text-end">Tổng tiền</td>
             <td colspan="2"><strong class="text-danger">@(total.ToString("n0"))</strong></td>
         </tr>
     </table>
@@ -53,12 +56,14 @@
         <a class="btn btn-info" asp-action="CheckOut">Thanh toán</a>
     </div>
 
-
+    <div class="text-end" style="padding-bottom: 20px; margin-left: 1300px;">
+        <a class="btn btn-info" asp-controller="SanPham" asp-action="Index" style="text-decoration:none">Mua tiếp</a>
+    </div>
 }
 else
 {
     <p class="alert alert-danger">Giỏ hàng rỗng!</p>
 }
-<div class="text-end" style="padding-bottom: 20px; margin-left: 1300px;">
-    <a class="btn btn-info" asp-controller="SanPham" asp-action="Index" style="text-decoration:none">Về trang sản phẩm</a>
-</div>
+@await Component.InvokeAsync("Notyf")
+
+

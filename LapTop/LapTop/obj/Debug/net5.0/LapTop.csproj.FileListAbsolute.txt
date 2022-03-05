@@ -1007,3 +1007,5 @@ E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\LapTop.genruntimeconfig.
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\Cart.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\CheckOut.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\SignUp.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\ChangePassword.cshtml.g.cs

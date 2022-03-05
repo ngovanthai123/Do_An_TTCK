@@ -19,7 +19,7 @@
         </tr>
         @foreach (var i in Model)
         {
-            amount = i.Sanpham.GiaBan * i.Quantity ;
+            amount = i.Sanpham.GiaBan * i.Quantity;
             total += amount;
             <tr class="align-middle">
                 <td>@(num++)</td>
@@ -32,14 +32,14 @@
                 <td>
                     <form asp-action="UpdateItem" method="post">
                         <div class="row">
-                            <div class="col" style="width: 24%;">
+                            <div class="col" style="width: 28%;">
                                 <input name="id" type="hidden" asp-for="@(i.Sanpham.Id)" />
                                 <input name="quantity" type="number" asp-for="@(i.Quantity)" class="form-control" />
                                 <div class="col">
                                     <input class="btn btn-warning" type="submit" value="Cập nhật" />
                                 </div>
                             </div>
-                           
+
                         </div>
                     </form>
                 </td>
@@ -48,7 +48,7 @@
             </tr>
         }
         <tr>
-            <td colspan="4" class="text-end">Tổng tiền</td>
+            <td colspan="4" class="text-end" style="text-align: right;">Tổng tiền:</td>
             <td colspan="2"><strong class="text-danger">@(total.ToString("n0"))</strong></td>
         </tr>
     </table>

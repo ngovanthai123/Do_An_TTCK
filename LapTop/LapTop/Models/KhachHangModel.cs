@@ -41,7 +41,7 @@ namespace LapTop.Models
         public string HoVaTen { get; set; }
         [Display(Name = "Số điện thoại")]
         [Required(ErrorMessage = "Số điện thoại không được bỏ trống!")]
-        public string DienThoai { get; set; }
+        public string SoDienThoai { get; set; }
         [Display(Name = "Địa chỉ")]
         [Required(ErrorMessage = "Địa chỉ không được bỏ trống!")]
         public string DiaChi { get; set; }
@@ -72,5 +72,20 @@ namespace LapTop.Models
         [DataType(DataType.Password)]
         public string MatKhau { get; set; }
 
+    }
+
+    public class ChangePassword
+    {
+        [Display(Name = "Mật khẩu cũ")]
+        [DataType(DataType.Password)]
+        public string MatKhauCu { get; set; }
+
+        [Display(Name = "Mật khẩu mới")]
+        [DataType(DataType.Password)]
+        public string MatKhauMoi { get; set; }
+
+        [Display(Name = "Xác nhận mật khẩu")]
+        [DataType(DataType.Password)]
+        public string XacNhanMatKhau { get; set; }
     }
 }

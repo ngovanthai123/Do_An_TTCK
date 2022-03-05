@@ -1,4 +1,5 @@
-﻿using LapTop.Data;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using LapTop.Data;
 using LapTop.Library;
 using LapTop.Models;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,7 @@ namespace LapTop.Controllers
         const string SessionTenDN = "_TenDN";
 
         public const string CARTKEY = "shopcart";
+        public INotyfService _notifyService { get; }
 
         private readonly ILogger<HomeController> _logger;
         private readonly LAPTOPContext _context;
@@ -49,46 +51,74 @@ namespace LapTop.Controllers
         }
 
         // Lưu danh sách CartItem trong giỏ hàng vào session
-        void SaveCartSession(List<CartItem> list)
+        void SaveCartSession(List<CartItem> lst)
         {
             var session = HttpContext.Session;
-            string jsoncart = JsonConvert.SerializeObject(list);
-            session.SetString("LAPTOP", jsoncart);
+            string jsoncart = JsonConvert.SerializeObject(lst);
+            //session.SetString("shopcart", jsoncart);
+            HttpContext.Response.Cookies.Append(HttpContext.Session.GetInt32(SessionMand).ToString(), jsoncart);
         }
 
         // Đọc danh sách CartItem từ session
         List<CartItem> GetCartItems()
         {
-            var session = HttpContext.Session;
-            string jsoncart = session.GetString("LAPTOP");
-            if (jsoncart != null)
+            var jsoncart = HttpContext.Request.Cookies[HttpContext.Session.GetInt32("_Id").ToString()];
+            if (!string.IsNullOrEmpty(jsoncart))
             {
                 return JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
+
             }
             return new List<CartItem>();
         }
 
         // Cho hàng vào giỏ
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> AddToCart(int id, int quanlity)
         {
-            var sp = await _context.Sanphams
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sp == null)
+            if (HttpContext.Session.GetInt32("_Id") == null)
             {
-                return NotFound("Sản phẩm không tồn tại");
-            }
-            var cart = GetCartItems();
-            var item = cart.Find(p => p.Sanpham.Id == id);
-            if (item != null)
-            {
-                item.Quantity++;
+                return RedirectToAction("Login", "Home");
             }
             else
             {
-                cart.Add(new CartItem() { Sanpham = sp, Quantity = 1 });
+                var product = await _context.Sanphams
+                .FirstOrDefaultAsync(m => m.Id == id);
+                if (product == null)
+                {
+                    return NotFound("Sản phẩm không tồn tại");
+                }
+                var cart = GetCartItems();
+                var item = cart.Find(p => p.Sanpham.Id == id);
+                if (item != null)
+                {
+                    if (quanlity < product.SoLuong)
+                    {
+                        if (quanlity == 0) item.Quantity++;
+                        else item.Quantity += quanlity;
+                    }
+                    /*ModelState.AddModelError("ErrorCart", "Số lượng không còn đủ");
+                    item.Quantity = 1;*/
+                }
+                else
+                {
+                    if (quanlity < product.SoLuong)
+                    {
+                        if (quanlity == 0)
+                        {
+                            cart.Add(new CartItem() { Sanpham = product, Quantity = 1 });
+                        }
+                        else
+                            cart.Add(new CartItem() { Sanpham = product, Quantity = quanlity });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("ErrorCart", "Số lượng không còn đủ");
+                        if (product.SoLuong > 0) cart.Add(new CartItem() { Sanpham = product, Quantity = 1 });
+                    }
+
+                }
+                SaveCartSession(cart);
+                return RedirectToAction(nameof(Cart));
             }
-            SaveCartSession(cart);
-            return RedirectToAction(nameof(Cart));
         }
 
         // Chuyển đến view xem giỏ hàng
@@ -115,9 +145,21 @@ namespace LapTop.Controllers
         {
             var cart = GetCartItems();
             var item = cart.Find(p => p.Sanpham.Id == id);
+            var product = _context.Sanphams
+                .FirstOrDefault(m => m.Id == id);
             if (item != null)
             {
-                item.Quantity = quantity;
+                if (quantity < product.SoLuong)
+                    item.Quantity = quantity;
+
+                else
+                {
+                   
+                    if (product.SoLuong > 1)
+                    {
+                        item.Quantity = 1;
+                    }
+                }
             }
             SaveCartSession(cart);
             return RedirectToAction(nameof(Cart));
@@ -184,7 +226,7 @@ namespace LapTop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp([Bind("Id,HoVaTen,DienThoai,DiaChi,Email,TenDangNhap,MatKhau,XacNhanMatKhau")] Khachhang khachHang)
+        public async Task<IActionResult> SignUp([Bind("Id,HoVaTen,SoDienThoai,DiaChi,Email,TenDangNhap,MatKhau,XacNhanMatKhau")] Khachhang khachHang)
         {
             if (ModelState.IsValid)
             {
@@ -212,6 +254,47 @@ namespace LapTop.Controllers
         {
             ModelState.AddModelError("SignUpError", "");
             return View();
+        }
+
+        // change password
+        public ActionResult ChangePassword()
+        {
+            ModelState.AddModelError("LoginError", "");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePassword model)
+        {
+            if (ModelState.IsValid)
+            {
+                int id = (int)HttpContext.Session.GetInt32("_Id");
+
+                string matKhauMaHoa = SHA1.ComputeHash(model.MatKhauCu);
+                string XacNhanMatKhauMaHoa = SHA1.ComputeHash(model.XacNhanMatKhau);
+                string matkhaumoi;
+                var taiKhoan = _context.Khachhangs.Where(r => r.Id == id && r.MatKhau == matKhauMaHoa).SingleOrDefault();
+                if (taiKhoan == null)
+                {
+                    ModelState.AddModelError("LoginError", "Mật khẩu cũ không chính xác!");
+                    return View(model);
+                }
+                else
+                {
+                    matkhaumoi = SHA1.ComputeHash(model.MatKhauMoi);
+                    Khachhang n = _context.Khachhangs.Find(id);
+                    n.MatKhau = matkhaumoi;
+                    n.XacNhanMatKhau = matkhaumoi;
+
+                    _context.Entry(n).State = EntityState.Modified;
+                    _context.SaveChanges();
+
+                    ModelState.AddModelError("LoginError", "Đổi mật khẩu thành công!");
+
+                }
+            }
+            return RedirectToAction("Logout", "Home");
+
         }
     }
 }

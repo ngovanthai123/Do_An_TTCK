@@ -27,12 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.TenDangNhap)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MatKhau)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.XacNhanMatKhau)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -54,12 +49,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TenDangNhap)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MatKhau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.XacNhanMatKhau)
-            </td>
+           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

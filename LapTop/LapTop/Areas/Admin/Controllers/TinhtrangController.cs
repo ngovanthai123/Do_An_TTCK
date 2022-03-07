@@ -55,7 +55,7 @@ namespace LapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TinhTrang1")] Tinhtrang tinhtrang)
+        public async Task<IActionResult> Create([Bind("Id,TinhTrang1,TenTinhTrang")] Tinhtrang tinhtrang)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace LapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TinhTrang1")] Tinhtrang tinhtrang)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TinhTrang1,TenTinhTrang")] Tinhtrang tinhtrang)
         {
             if (id != tinhtrang.Id)
             {

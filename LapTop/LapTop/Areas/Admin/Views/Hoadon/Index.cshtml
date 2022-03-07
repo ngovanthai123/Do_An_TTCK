@@ -22,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.NoiNhan)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.GhiChu)
             </th>
             <th>
@@ -31,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.IdnhanVienNavigation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdtinhTrangNavigation)
+                @Html.DisplayNameFor(model => model.IdtinhTrangNavigation.TenTinhTrang)
             </th>
             <th></th>
         </tr>
@@ -49,6 +52,9 @@
                 @Html.DisplayFor(modelItem => item.NoiNhan)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.SoDienThoai)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.GhiChu)
             </td>
             <td>
@@ -58,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.IdnhanVienNavigation.HoVaTen)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdtinhTrangNavigation.Id)
+                @Html.DisplayFor(modelItem => item.IdtinhTrangNavigation.TenTinhTrang)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

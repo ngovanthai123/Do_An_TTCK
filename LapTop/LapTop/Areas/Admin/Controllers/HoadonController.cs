@@ -53,7 +53,7 @@ namespace LapTop.Controllers
         {
             ViewData["IdkhachHang"] = new SelectList(_context.Khachhangs, "Id", "HoVaTen");
             ViewData["IdnhanVien"] = new SelectList(_context.Nhanviens, "Id", "HoVaTen");
-            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "Id");
+            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "TenTinhTrang");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace LapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdkhachHang,IdtinhTrang,IdnhanVien,NgayLap,TongGia,NoiNhan,GhiChu")] Hoadon hoadon)
+        public async Task<IActionResult> Create([Bind("Id,IdkhachHang,IdtinhTrang,IdnhanVien,NgayLap,TongGia,NoiNhan,SoDienThoai,GhiChu")] Hoadon hoadon)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace LapTop.Controllers
             }
             ViewData["IdkhachHang"] = new SelectList(_context.Khachhangs, "Id", "HoVaTen", hoadon.IdkhachHang);
             ViewData["IdnhanVien"] = new SelectList(_context.Nhanviens, "Id", "HoVaTen", hoadon.IdnhanVien);
-            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "Id", hoadon.IdtinhTrang);
+            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "TenTinhTrang", hoadon.IdtinhTrang);
             return View(hoadon);
         }
 
@@ -91,7 +91,7 @@ namespace LapTop.Controllers
             }
             ViewData["IdkhachHang"] = new SelectList(_context.Khachhangs, "Id", "HoVaTen", hoadon.IdkhachHang);
             ViewData["IdnhanVien"] = new SelectList(_context.Nhanviens, "Id", "HoVaTen", hoadon.IdnhanVien);
-            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "Id", hoadon.IdtinhTrang);
+            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "TenTinhTrang", hoadon.IdtinhTrang);
             return View(hoadon);
         }
 
@@ -100,7 +100,7 @@ namespace LapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdkhachHang,IdtinhTrang,IdnhanVien,NgayLap,TongGia,NoiNhan,GhiChu")] Hoadon hoadon)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdkhachHang,IdtinhTrang,IdnhanVien,NgayLap,TongGia,NoiNhan,SoDienThoai,GhiChu")] Hoadon hoadon)
         {
             if (id != hoadon.Id)
             {
@@ -129,7 +129,7 @@ namespace LapTop.Controllers
             }
             ViewData["IdkhachHang"] = new SelectList(_context.Khachhangs, "Id", "HoVaTen", hoadon.IdkhachHang);
             ViewData["IdnhanVien"] = new SelectList(_context.Nhanviens, "Id", "HoVaTen", hoadon.IdnhanVien);
-            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "Id", hoadon.IdtinhTrang);
+            ViewData["IdtinhTrang"] = new SelectList(_context.Tinhtrangs, "Id", "TenTinhTrang", hoadon.IdtinhTrang);
             return View(hoadon);
         }
 

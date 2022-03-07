@@ -21,7 +21,8 @@ namespace LapTop.Models
         public int Id { get; set; }
         [Column("TinhTrang")]
         public int? TinhTrang1 { get; set; }
-
+        [StringLength(255)]
+        public string TenTinhTrang { get; set; }
         [InverseProperty(nameof(Hoadon.IdtinhTrangNavigation))]
         public virtual ICollection<Hoadon> Hoadons { get; set; }
     }

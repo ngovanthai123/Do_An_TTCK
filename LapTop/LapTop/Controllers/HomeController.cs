@@ -170,7 +170,53 @@ namespace LapTop.Controllers
             return View(GetCartItems());
         }
 
+        //lưu thông tin hóa đơn
+        [HttpPost]
+        public async Task<IActionResult> CreateBill(int cusname, string cusphone, string cusadd)
+        {
 
+            var session = HttpContext.Session;
+            var b = new Hoadon();
+            b.NgayLap = DateTime.Now;
+            b.IdkhachHang = HttpContext.Session.GetInt32(SessionMand);
+            if (b.IdkhachHang == null)
+            {
+                return Redirect("/Home/Login");
+            }
+            b.NoiNhan = cusadd;
+            b.SoDienThoai = cusphone;
+            b.IdtinhTrang = 1;
+            _context.Add(b);
+            await _context.SaveChangesAsync();
+            //them billdetails
+            var cart = GetCartItems();
+            int amount = 0;
+            int total = 0;
+
+            foreach (var i in cart)
+            {
+                var d = new Chitiethoadon();
+                d.IdhoaDon = b.Id;
+                d.IdsanPham = i.Sanpham.Id;
+                var sanpham = _context.Sanphams.FirstOrDefault(t => t.Id == d.IdsanPham);
+                sanpham.SoLuong -= i.Quantity;
+                await _context.SaveChangesAsync();
+                d.DonGia = i.Sanpham.GiaBan;
+                d.SoLuongMua = Convert.ToInt16(i.Quantity);
+
+                amount = i.Sanpham.GiaBan * i.Quantity;
+                total += amount;
+                _context.Add(d);
+            }
+
+            await _context.SaveChangesAsync();
+
+            HttpContext.Response.Cookies.Append(HttpContext.Session.GetInt32(SessionMand).ToString(), "");
+
+            //chuyển hướng 
+            return RedirectToAction("Index", "SanPham");
+
+        }
 
         public ActionResult Login()
         {

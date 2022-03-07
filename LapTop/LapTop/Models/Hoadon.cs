@@ -30,6 +30,7 @@ namespace LapTop.Models
         public int? TongGia { get; set; }
         [StringLength(255)]
         public string NoiNhan { get; set; }
+        public string SoDienThoai { get; set; }
         [Column(TypeName = "text")]
         public string GhiChu { get; set; }
 

@@ -1009,3 +1009,7 @@ E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\CheckOu
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\SignUp.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\ChangePassword.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Asus\Index.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Aser\Index.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\HP\Index.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Dell\Index.cshtml.g.cs

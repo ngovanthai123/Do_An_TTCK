@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace CuaHangBanLapTop.Controllers
 {
-    public class SanPham : Controller
+    public class HP : Controller
     {
         private LAPTOPContext db = new LAPTOPContext();
         private readonly LAPTOPContext _context;
         private readonly IProduct _product;
-        public SanPham(LAPTOPContext context, IProduct product)
+        public HP(LAPTOPContext context, IProduct product)
 
         {
             _context = context;
@@ -48,14 +48,14 @@ namespace CuaHangBanLapTop.Controllers
             ViewBag.totalProduct = totalProduct;
 
             ViewBag.numberPage = _product.numberPage(totalProduct, limit);
-            var dress = _context.Sanphams 
-                .Skip((int)((page - 1) * limit)).Take(limit);
-           
+            var dress = _context.Sanphams
+                .Where(sp => sp.IddongSanPham == 3)
+            .Skip((int)((page - 1) * limit)).Take(limit);
+
             if (!String.IsNullOrEmpty(timkiem))
             {
                 dress = dress.Where(s => s.TenSanPham.Contains(timkiem));
             }
-            ViewBag.thongbao = dress.Count();
             return View(dress);
         }
 

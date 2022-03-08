@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using Newtonsoft.Json
 @inject IHttpContextAccessor HttpContextAccessor
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,7 +179,7 @@
                                 <a asp-controller="Home" asp-action="ChangePassword">Đổi mật khẩu</a>
                                 <a asp-controller="Home" asp-action="Logout">Đăng xuất</a>
                             </div>
-                        </div>                                           
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -214,8 +215,8 @@
                         </div>
                         <!-- /SEARCH BAR -->
                         <!-- ACCOUNT -->
-                        <div class="col-md-3 clearfix"style="width: 188px;">
-                            <div class="header-ctn"> 
+                        <div class="col-md-3 clearfix" style="width: 188px;">
+                            <div class="header-ctn">
                                 <div>
                                     <a href="#" style="color:black;font-weight:bold">
                                         <i class="fa fa-heart-o"></i>
@@ -265,6 +266,7 @@
                     <li><a asp-controller="UuDai" asp-action="Index">Ưu đãi lớn</a></li>
                     <li><a asp-controller="About" asp-action="Index">Về chúng tôi</a></li>
                 </ul>
+                
                 <!-- /NAV -->
             </div>
             <!-- /responsive-nav -->

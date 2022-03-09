@@ -60,7 +60,19 @@
                 @Html.DisplayFor(modelItem => item.NgayKetThucKhuyenMai)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SoLuong)
+                @if (item.SoLuong.Value > 0)
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div style="color:green; font-family:'Agency FB'; font-size:15px;font-weight:bold">Còn hàng</div>
+                    </div> }
+                else
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="badge badge-danger badge-dot m-r-10"></div>
+                        <div style="color:red; font-family:'Agency FB'; font-size:15px;font-weight:bold">Hết hàng</div>
+                    </div>}
+
             </td>
            
             

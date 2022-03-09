@@ -31,8 +31,12 @@ namespace LapTop.Models
         public string TenSanPham { get; set; }
         [StringLength(255)]
         public string AnhSanPham { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
         public int GiaBan { get; set; }
-        public int? GiaKhuyenMai { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
+        public int GiaKhuyenMai { get; set; }
         [Column(TypeName = "date")]
         public DateTime? NgayBatDauKhuyenMai { get; set; }
         [Column(TypeName = "date")]

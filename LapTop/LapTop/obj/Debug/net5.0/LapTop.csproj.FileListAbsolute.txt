@@ -1013,3 +1013,4 @@ E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Asus\Index.c
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Aser\Index.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\HP\Index.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Dell\Index.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\SanPham\Details.cshtml.g.cs

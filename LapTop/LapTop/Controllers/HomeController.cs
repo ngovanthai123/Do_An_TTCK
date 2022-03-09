@@ -201,7 +201,14 @@ namespace LapTop.Controllers
                 var sanpham = _context.Sanphams.FirstOrDefault(t => t.Id == d.IdsanPham);
                 sanpham.SoLuong -= i.Quantity;
                 await _context.SaveChangesAsync();
-                d.DonGia = i.Sanpham.GiaBan;
+                if(i.Sanpham.GiaKhuyenMai>0)
+                {
+                    d.DonGia = i.Sanpham.GiaKhuyenMai;
+                }    
+                else
+                {
+                    d.DonGia = i.Sanpham.GiaBan;
+                }               
                 d.SoLuongMua = Convert.ToInt16(i.Quantity);
 
                 amount = i.Sanpham.GiaBan * i.Quantity;

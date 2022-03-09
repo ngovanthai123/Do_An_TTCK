@@ -74,7 +74,7 @@
                     <h5>Dòng: @Html.DisplayFor(model => model.IddongSanPhamNavigation.TenSanPham)</h5>
                     <h5>Nơi sản xuất: @Html.DisplayFor(model => model.IdnoiSanXuatNavigation.TenNoiSanXuat)</h5>
                     <h5>Bảo hành: @Html.DisplayFor(model => model.BaoHanh)</h5>
-                    <h5 style="text-align: justify;">Mô tả:</h5> <p>@Html.DisplayFor(model => model.MoTa)</p>
+                    <h5 style="text-align: justify;">Mô tả:</h5> <p> @Html.Raw(Model.MoTa)</p>
                     <ul class="product-links">
                         <li><h5>Share:</h5></li>
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>

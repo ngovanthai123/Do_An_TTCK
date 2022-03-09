@@ -25,7 +25,7 @@ namespace LapTop.Models
         public int? IdtinhTrang { get; set; }
         [Column("IDNhanVien")]
         public int? IdnhanVien { get; set; }
-        [Column(TypeName = "date")]
+        [Column(TypeName = "datetime")]
         public DateTime? NgayLap { get; set; }
         public int? TongGia { get; set; }
         [StringLength(255)]

@@ -172,12 +172,13 @@ namespace LapTop.Controllers
 
         //lưu thông tin hóa đơn
         [HttpPost]
-        public async Task<IActionResult> CreateBill(int cusname, string cusphone, string cusadd)
+        public async Task<IActionResult> CreateBill(int cusname,string cusadd, string cusphone)
         {
 
             var session = HttpContext.Session;
             var b = new Hoadon();
             b.NgayLap = DateTime.Now;
+            
             b.IdkhachHang = HttpContext.Session.GetInt32(SessionMand);
             if (b.IdkhachHang == null)
             {

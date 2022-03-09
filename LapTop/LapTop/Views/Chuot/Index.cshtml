@@ -175,6 +175,8 @@
                 <div class="store-filter clearfix">
                     <div class="store-sort">
                        
+
+                        
                     </div>
                     
                 </div>
@@ -229,7 +231,7 @@
                             {
                                 int prevPage = pageCurrent - 1;
                                 var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
-                                <li class="page-item"><a class="page-link" asp-controller="Asus" asp-action="Index" asp-all-route-data="PrevLink">Trước</a></li>
+                                <li class="page-item"><a class="page-link" asp-controller="Chuot" asp-action="Index" asp-all-route-data="PrevLink">Trước</a></li>
                             }
 
                             int from = pageCurrent - offset;
@@ -255,11 +257,11 @@
                     };
                                 if (pageCurrent == i)
                                 {
-                                    <li class="page-item active "><a class="page-link" asp-controller="Asus" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                                    <li class="page-item active "><a class="page-link" asp-controller="Chuot" asp-action="Index" asp-all-route-data="parms">@i</a></li>
                                 }
                                 else
                                 {
-                                    <li class="page-item  "><a class="page-link" asp-controller="Asus" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                                    <li class="page-item  "><a class="page-link" asp-controller="Chuot" asp-action="Index" asp-all-route-data="parms">@i</a></li>
                                 }
 
                             }
@@ -268,14 +270,14 @@
                             {
                                 <li><a>...</a></li>
                                 var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
-                                <li class="page-item"><a class="page-link" asp-controller="Asus" asp-action="Index" asp-all-route-data="LastLink">Cuối</a></li>
+                                <li class="page-item"><a class="page-link" asp-controller="Chuot" asp-action="Index" asp-all-route-data="LastLink">Cuối</a></li>
                             }
 
                             if (pageCurrent < numberPage)
                             {
                                 int nextPage = pageCurrent + 1;
                                 var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
-                                <li class="page-item"><a class="page-link" asp-controller="Asus" asp-action="Index" asp-all-route-data="NextLink"><i class="fa fa-angle-right"></i></a></li>
+                                <li class="page-item"><a class="page-link" asp-controller="Chuot" asp-action="Index" asp-all-route-data="NextLink"><i class="fa fa-angle-right"></i></a></li>
                             }
                         }
                     </ul>

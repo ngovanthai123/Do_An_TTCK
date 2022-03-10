@@ -35,6 +35,8 @@ namespace LapTop.Models
         public string MatKhau { get; set; }
         [Required]
         [StringLength(255)]
+        [Compare("MatKhau", ErrorMessage = "Xác nhận mật khẩu không chính xác!")]
+        [DataType(DataType.Password)]
         public string XacNhanMatKhau { get; set; }
 
         [InverseProperty(nameof(Hoadon.IdkhachHangNavigation))]

@@ -265,7 +265,7 @@
                     <li><a asp-controller="UuDai" asp-action="Index">Ưu đãi lớn</a></li>
                     <li><a asp-controller="About" asp-action="Index">Về chúng tôi</a></li>
                 </ul>
-                
+
                 <!-- /NAV -->
             </div>
             <!-- /responsive-nav -->
@@ -431,5 +431,8 @@
     @await RenderSectionAsync("Scripts", required: false)
     @await Component.InvokeAsync("Notyf")
 
+    <div class="zalo-chat-widget" data-oaid="1140921737789816953" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+
+    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 </body>
 </html>

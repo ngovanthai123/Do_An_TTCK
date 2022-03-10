@@ -7,47 +7,39 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a style="margin:5px;" class="btn btn-primary btn-tone m-r-5" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenSanPham)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnhSanPham)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaBan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaKhuyenMai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayBatDauKhuyenMai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayKetThucKhuyenMai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoLuong)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.BaoHanh)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
+<div style="margin:5px;" class="card mt-1">
+    <h5 class="card-header">@ViewBag.Title</h5>
+    <div class="card-body">
+        <table class="table table-bordered table-hover table-sm mb-0">
+
+            <tr class="text-center">
+                <th width="5%">#</th>
+                <th scope="col">Tên Sản Phẩm </th>
+                <th scope="col">Ảnh Sản Phẩm </th>
+                <th scope="col">Giá bán </th>
+                <th scope="col">Giá khuyến mãi </th>
+                <th scope="col">Số Lượng </th>
+                @* <th scope="col">Mô tả </th>*@
+                <th scope="col">Bảo Hành </th>
+                <th scope="col">Dòng Sản Phẩm </th>
+                <th scope="col">Nơi Sản Xuất </th>
+                <th width="5%">Sửa</th>
+                <th width="5%">Chi tiết</th>
+                <th width="5%">Xóa</th>
+            </tr>
+
+            @{ int stt = 1; }
+            @foreach (var item in Model)
+            {
+        <tr class="text-center">
+            <td>@stt</td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenSanPham)
             </td>
             <td>
-                <img src="~/Images/@Html.DisplayFor(modelItem=> item.AnhSanPham)" width="60" height="60" />
+                <img src="~/Images/@Html.DisplayFor(modelItem=> item.AnhSanPham)" width="70" height="70" class="img-thumbnail" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GiaBan)
@@ -56,36 +48,33 @@
                 @Html.DisplayFor(modelItem => item.GiaKhuyenMai)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NgayBatDauKhuyenMai)
+                @Html.DisplayFor(modelItem => item.SoLuong)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayKetThucKhuyenMai)
-            </td>
-            <td>
-                @if (item.SoLuong.Value > 0)
-                {
-                    <div class="d-flex align-items-center">
-                        <div class="badge badge-success badge-dot m-r-10"></div>
-                        <div style="color:green; font-family:'Agency FB'; font-size:15px;font-weight:bold">Còn hàng</div>
-                    </div> }
-                else
-                {
-                    <div class="d-flex align-items-center">
-                        <div class="badge badge-danger badge-dot m-r-10"></div>
-                        <div style="color:red; font-family:'Agency FB'; font-size:15px;font-weight:bold">Hết hàng</div>
-                    </div>}
-
-            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.MoTa)
+        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.BaoHanh)
             </td>
-            
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.IddongSanPhamNavigation.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdnoiSanXuatNavigation.TenNoiSanXuat)
+            </td>
+            <td class="text-center">
+                <a asp-action="Edit" asp-route-id="@item.Id"><img src="~/images/wrench.jpg" /></a>
+            </td>
+            <td class="text-center">
+                <a asp-action="Details" asp-route-id="@item.Id"><img src="~/images/list.jpg" /></a>
+            </td>
+            <td class="text-center">
+                <a asp-action="Delete" asp-route-id="@item.Id"><img src="~/images/delete.jpg" /></a>
             </td>
         </tr>
-}
-    </tbody>
-</table>
+                stt++;
+            }
+
+        </table>
+    </div>
+</div>

@@ -1019,3 +1019,4 @@ E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\BanPhim\Inde
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Ram\Index.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\TaiNghe\Index.cshtml.g.cs
 E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Tui\Index.cshtml.g.cs
+E:\DO_AN_TTCK\Do_An_TTCK\LapTop\LapTop\obj\Debug\net5.0\Razor\Views\Home\DonHangCuaToi.cshtml.g.cs

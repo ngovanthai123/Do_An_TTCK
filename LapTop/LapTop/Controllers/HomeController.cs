@@ -36,7 +36,8 @@ namespace LapTop.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var dress = _context.Sanphams;
+            return View(dress);
         }
 
         public IActionResult Privacy()
@@ -348,7 +349,29 @@ namespace LapTop.Controllers
                 }
             }
             return RedirectToAction("Logout", "Home");
+        }
 
+        public ActionResult DonHangCuaToi()
+        {
+            int makh = Convert.ToInt32(HttpContext.Session.GetInt32("_Id").ToString());
+            var DonHangCuaToi = (from sp in db.Sanphams
+                                 join chitiet in db.Chitiethoadons on sp.Id equals chitiet.IdsanPham
+                                 join dhang in db.Hoadons on chitiet.IdhoaDon equals dhang.Id                              
+                                 join kh in db.Khachhangs on dhang.IdkhachHang equals kh.Id
+                                 join TT in db.Tinhtrangs on dhang.IdtinhTrang equals TT.Id
+                                 where (kh.Id == makh)
+
+                                 select new DonHangCuaToi()
+                                 {
+                                     TenSanPham = sp.TenSanPham,
+                                     AnhSanPham = sp.AnhSanPham,
+                                     GiaBan = chitiet.DonGia,
+                                     IdDH = dhang.Id,
+/*                                     TinhTrang = dhang.IdtinhTrang,
+*/                                     NgayLap = dhang.NgayLap,
+                                 }).OrderByDescending(dhang => dhang.NgayLap).ToList();
+
+            return View(DonHangCuaToi);
         }
     }
 }

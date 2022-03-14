@@ -49,7 +49,7 @@ namespace LapTop.Controllers
         // GET: Binhluan/Create
         public IActionResult Create()
         {
-            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham");
+            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "IdsanPham", "TenSanPham");
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace LapTop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", binhluan.IdsanPham);
+            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "IdsanPham", "TenSanPham", binhluan.IdsanPham);
             return View(binhluan);
         }
 
@@ -83,7 +83,7 @@ namespace LapTop.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", binhluan.IdsanPham);
+            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "IdsanPham", "TenSanPham", binhluan.IdsanPham);
             return View(binhluan);
         }
 
@@ -119,7 +119,7 @@ namespace LapTop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", binhluan.IdsanPham);
+            ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "IdsanPham", "TenSanPham", binhluan.IdsanPham);
             return View(binhluan);
         }
 

@@ -4,46 +4,67 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Binhluan</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="IdsanPham" class="control-label"></label>
-                <select asp-for="IdsanPham" class="form-control" asp-items="ViewBag.IdsanPham"></select>
-                <span asp-validation-for="IdsanPham" class="text-danger"></span>
+<div style="margin:5px;" class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="BinhLuan" asp-action="Index">Quay về danh sách</a>
+            <span class="breadcrumb-item active"> Cập nhật bình luận</span>
+        </nav>
+    </div>
+</div>
+<div style="margin:5px;" class="row">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Cập nhật bình luận</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-3">
+                        <label>Tên Sản Phẩm</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        @Html.DropDownList("IdsanPham", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdsanPham, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Họ tên người bình luận</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="HoTen" class="form-control" placeholder="Họ tên" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Ngày giờ bình luận</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="NgayGio" class="form-control" placeholder="Ngày giờ" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Nội dung</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <textarea id="editor" asp-for="NoiDung" class="form-control" placeholder="Mô Tả"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="HoTen" class="control-label"></label>
-                <input asp-for="HoTen" class="form-control" />
-                <span asp-validation-for="HoTen" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayGio" class="control-label"></label>
-                <input asp-for="NgayGio" class="form-control" />
-                <span asp-validation-for="NgayGio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NoiDung" class="control-label"></label>
-                <input asp-for="NoiDung" class="form-control" />
-                <span asp-validation-for="NoiDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>

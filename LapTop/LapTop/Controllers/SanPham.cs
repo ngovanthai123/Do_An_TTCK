@@ -48,9 +48,24 @@ namespace CuaHangBanLapTop.Controllers
             ViewBag.totalProduct = totalProduct;
 
             ViewBag.numberPage = _product.numberPage(totalProduct, limit);
-            var dress = _context.Sanphams 
+            var dress = _context.Sanphams
                 .Skip((int)((page - 1) * limit)).Take(limit);
-           
+            /* var dress = (from sp in db.Sanphams
+                          join dong in db.Dongsanphams on sp.IddongSanPham equals dong.Id
+                          join dm in db.Danhmucsanphams on dong.IddanhMuc equals dm.Id
+                          where (dm.Id == 1)
+                          select new 
+                          {
+                              sp.TenSanPham,
+                              sp.AnhSanPham,
+                              sp.GiaBan,
+                              sp.GiaKhuyenMai,
+                              sp.SoLuong,
+                              sp.NgayBatDauKhuyenMai,
+                              sp.NgayKetThucKhuyenMai,
+                          });
+ */
+
             if (!String.IsNullOrEmpty(timkiem))
             {
                 dress = dress.Where(s => s.TenSanPham.Contains(timkiem));

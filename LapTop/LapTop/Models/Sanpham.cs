@@ -61,4 +61,8 @@ namespace LapTop.Models
         [InverseProperty(nameof(Chitiethoadon.IdsanPhamNavigation))]
         public virtual ICollection<Chitiethoadon> Chitiethoadons { get; set; }
     }
+    public class SP
+    {
+        Sanpham SanPham { get; set; }
+    }
 }

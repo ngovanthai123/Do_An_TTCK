@@ -4,64 +4,86 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Nhanvien</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="HoVaTen" class="control-label"></label>
-                <input asp-for="HoVaTen" class="form-control" />
-                <span asp-validation-for="HoVaTen" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoDienThoai" class="control-label"></label>
-                <input asp-for="SoDienThoai" class="form-control" />
-                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnhDaiDien" class="control-label"></label>
-                <input asp-for="AnhDaiDien" class="form-control" />
-                <span asp-validation-for="AnhDaiDien" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenDangNhap" class="control-label"></label>
-                <input asp-for="TenDangNhap" class="form-control" />
-                <span asp-validation-for="TenDangNhap" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MatKhau" class="control-label"></label>
-                <input asp-for="MatKhau" class="form-control" />
-                <span asp-validation-for="MatKhau" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="XacNhanMatKhau" class="control-label"></label>
-                <input asp-for="XacNhanMatKhau" class="form-control" />
-                <span asp-validation-for="XacNhanMatKhau" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quyen" class="control-label"></label>
-                <input asp-for="Quyen" class="form-control" />
-                <span asp-validation-for="Quyen" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div style="margin:5px;" class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="NhanVien" asp-action="Index">Quay về danh sách</a>
+            <span class="breadcrumb-item active"> Thêm nhân viên</span>
+        </nav>
     </div>
 </div>
+<div style="margin:5px;" class="row">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Thêm nhân viên</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-3">
+                        <label>Họ và tên</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="HoVaTen" class="form-control" placeholder="Họ và tên" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Số điện thoại</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="SoDienThoai" class="form-control" placeholder="Số điện thoại" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Ảnh đại diện</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="AnhDaiDien" class="form-control" placeholder="Ảnh đại diện" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tên đăng nhập</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="TenDangNhap" class="form-control" placeholder="Tên đăng nhập" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Mật khẩu</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="MatKhau" class="form-control" placeholder="Mật khẩu" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Xác nhận mật khẩu</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input type="hidden" asp-for="XacNhanMatKhau" class="form-control" />
+                        <input asp-for="XacNhanMatKhau" class="form-control" placeholder="Xác nhận mật khẩu" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Quyền</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.Quyen, new SelectList(new[] {
+                            new SelectListItem { Value = null, Text = "-- Chọn quyền --"},
+                            new SelectListItem { Value = "1", Text = "Quản lý"},
+                            new SelectListItem { Value = "0", Text = "Nhân viên"}
+                        }, "Value", "Text"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {

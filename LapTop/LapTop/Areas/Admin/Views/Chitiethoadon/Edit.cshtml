@@ -4,44 +4,58 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Chitiethoadon</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="IdhoaDon" class="control-label"></label>
-                <select asp-for="IdhoaDon" class="form-control" asp-items="ViewBag.IdhoaDon"></select>
-                <span asp-validation-for="IdhoaDon" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdsanPham" class="control-label"></label>
-                <select asp-for="IdsanPham" class="form-control" asp-items="ViewBag.IdsanPham"></select>
-                <span asp-validation-for="IdsanPham" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoLuongMua" class="control-label"></label>
-                <input asp-for="SoLuongMua" class="form-control" />
-                <span asp-validation-for="SoLuongMua" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DonGia" class="control-label"></label>
-                <input asp-for="DonGia" class="form-control" />
-                <span asp-validation-for="DonGia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div style="margin:5px;" class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="Chitiethoadon" asp-action="Index">Quay về danh sách</a>
+            <span class="breadcrumb-item active"> Thêm chi tiết hóa đơn</span>
+        </nav>
     </div>
 </div>
+<div style="margin:5px;" class="row">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Thêm chi tiết hóa đơn</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-3">
+                        <label>Số điện thoại</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        @Html.DropDownList("IdhoaDon", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdhoaDon, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tên sản phẩm</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        @Html.DropDownList("IdsanPham", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdsanPham, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Số lượng mua</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="SoLuongMua" class="form-control" placeholder="Số lượng mua" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Đơn giá</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input asp-for="DonGia" class="form-control" placeholder="Đơn giá" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {

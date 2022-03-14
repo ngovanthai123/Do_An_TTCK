@@ -114,7 +114,10 @@ namespace LapTop.Controllers
             {
                 try
                 {
-                    sanpham.AnhSanPham = Upload(file);
+                    if(file!=null)
+                    {
+                        sanpham.AnhSanPham = Upload(file);
+                    }
                     _context.Update(sanpham);
                     await _context.SaveChangesAsync();
                 }

@@ -50,7 +50,7 @@ namespace LapTop.Controllers
         // GET: Chitiethoadon/Create
         public IActionResult Create()
         {
-            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "Id");
+            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "SoDienThoai");
             ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham");
             return View();
         }
@@ -68,7 +68,7 @@ namespace LapTop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "Id", chitiethoadon.IdhoaDon);
+            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "SoDienThoai", chitiethoadon.IdhoaDon);
             ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", chitiethoadon.IdsanPham);
             return View(chitiethoadon);
         }
@@ -86,7 +86,7 @@ namespace LapTop.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "Id", chitiethoadon.IdhoaDon);
+            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "SoDienThoai", chitiethoadon.IdhoaDon);
             ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", chitiethoadon.IdsanPham);
             return View(chitiethoadon);
         }
@@ -123,7 +123,7 @@ namespace LapTop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "Id", chitiethoadon.IdhoaDon);
+            ViewData["IdhoaDon"] = new SelectList(_context.Hoadons, "Id", "SoDienThoai", chitiethoadon.IdhoaDon);
             ViewData["IdsanPham"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", chitiethoadon.IdsanPham);
             return View(chitiethoadon);
         }
